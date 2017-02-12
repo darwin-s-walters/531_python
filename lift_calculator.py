@@ -11,7 +11,7 @@ def print_531_cycle( lift_cycle ):
 
     print "\nLift: " + lift_cycle.lift_name
     print "\n\nTraining Max: " + str(lift_cycle.training_max)
-    
+
     print "\nWarmup Sets ( 5 reps each)"
     print_set_weights(lift_cycle.warmup_sets)
 
@@ -26,15 +26,15 @@ def print_531_cycle( lift_cycle ):
     print "\n"
 
 def save_cycle_to_file( lift_cycle ):
-   current_time = datetime.datetime.now() 
+   current_time = datetime.datetime.now()
 
 
    timestamp = str(current_time.month) + "_" + str(current_time.day) + "_" + str(current_time.year)
-   file_name = lift_cycle.lift_name + "_" + timestamp 
-   
+   file_name = lift_cycle.lift_name + "_" + timestamp
+
    orig_stdout = sys.stdout
- 
-   log_file = open( file_name, 'w' )
+
+   log_file = open( "saved_lift_cycles/" + file_name, 'w' )
    sys.stdout = log_file
 
    print_531_cycle( lift_cycle )
