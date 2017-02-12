@@ -1,5 +1,6 @@
 import LiftCycle
 import datetime
+import sys
 
 def print_set_weights( set_weight_list ):
     for current_set_weight in set_weight_list:
@@ -27,15 +28,18 @@ def print_531_cycle( lift_cycle ):
 def save_cycle_to_file( lift_cycle ):
    current_time = datetime.datetime.now() 
 
+
    timestamp = str(current_time.month) + "_" + str(current_time.day) + "_" + str(current_time.year)
    file_name = lift_cycle.lift_name + "_" + timestamp 
    
+   orig_stdout = sys.stdout
+ 
    log_file = open( file_name, 'w' )
-   print >>log_file, print_531_cycle
-   # log_file.write( print_531_cycle( lift_cycle ) )
-   log_file.close()
+   sys.stdout = log_file
 
-   
+   print_531_cycle( lift_cycle )
+   sys.stdout = orig_stdout
+   log_file.close()
 
 training_max = raw_input("Please enter your training max: ")
 lift_name = raw_input("Please enter lift name: ")
@@ -43,4 +47,4 @@ lift_name = raw_input("Please enter lift name: ")
 lift_cycle = LiftCycle.LiftCycle( lift_name, training_max )
 
 print_531_cycle( lift_cycle )
-# save_cycle_to_file( lift_cycle )
+save_cycle_to_file( lift_cycle )
